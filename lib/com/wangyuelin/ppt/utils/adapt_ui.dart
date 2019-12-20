@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 
 ///UI适配器
@@ -18,13 +16,13 @@ class UIAdaptor {
   static double _uiH;
 
   //在宽和高方向的比例
-  static double _ratioW;
-  static double _ratioH;
+  static double _ratioW = 1.5;
+  static double _ratioH = 1.5;
 
-  static double _textScaleFactor;
+  static double _textScaleFactor = 1;
 
-
-  static init(MediaQueryData mediaQueryData, {double uiW = 750, double uiH = 1334}) {
+  static void initData(MediaQueryData mediaQueryData,
+      {double uiW = 750, double uiH = 1334}) {
     assert(mediaQueryData != null);
     assert(uiW > 0);
     assert(uiH > 0);
@@ -34,7 +32,13 @@ class UIAdaptor {
     _uiH = uiH;
     _ratioW = _screenW / _uiW;
     _ratioH = _screenH / _uiH;
-    _textScaleFactor = mediaQueryData.textScaleFactor;//字体的一个逻辑像素对应多少实际像素
+    _textScaleFactor = mediaQueryData.textScaleFactor; //字体的一个逻辑像素对应多少实际像素
+    print('屏幕的宽和高' +
+        (_screenW?.toString() ?? 'null') +
+        " X " +
+        (_screenH?.toString() ?? 'null') +
+        ' 逻辑像素：' +
+        (mediaQueryData.textScaleFactor ?? 0).toString() + ' _ratioW：' + (_ratioW ?? 'null').toString());
   }
 
   ///
@@ -55,6 +59,17 @@ class UIAdaptor {
   /// 设置字体
   ///
   static double sp(int fontSize) {
+    print('开始返回像素');
+    print('fontSize:' +
+        (fontSize?.toString() ?? 'null') +
+        ' _ratioW:' +
+        ((_ratioW ?? 'null') .toString()) +
+        ' _textScaleFactor:' +
+        (_textScaleFactor?.toString() ?? 'null') +
+        ' _uiW:' +
+        (_uiW?.toString() ?? 'null') +
+        ' _screenW:' +
+        (_screenW?.toString() ?? 'null'));
     return fontSize * _ratioW / _textScaleFactor;
   }
 
@@ -64,7 +79,4 @@ class UIAdaptor {
   static double onePx() {
     return 1 / (_ratioW <= 0 ? 1 : _ratioW);
   }
-
-
-
 }

@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
 
 
-    UIAdaptor.init(MediaQueryData.fromWindow(window));
+    UIAdaptor.initData(MediaQueryData.fromWindow(window));
 
     return MaterialApp(
       title: 'wyl PPT',
