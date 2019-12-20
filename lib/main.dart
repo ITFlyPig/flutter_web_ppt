@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
     UIAdaptor.init(MediaQueryData.fromWindow(window));
 
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'wyl PPT',
       theme: ThemeData(
         // This is the theme of your application.
         //
