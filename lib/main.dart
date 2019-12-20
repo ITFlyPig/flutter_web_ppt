@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
+import 'com/wangyuelin/ppt/pages/ppt/ppt_page.dart';
 import 'com/wangyuelin/ppt/utils/adapt_ui.dart';
 
 void main() => runApp(MyApp());
@@ -29,7 +30,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: PPTPage(),
     );
   }
 }
