@@ -20,6 +20,19 @@ class PPTPage extends StatefulWidget {
 class _PPTPageState extends State<PPTPage> {
   int _total = 6;
   int _curIndex = 0;
+  PageController _pageController;
+
+  @override
+  void initState() {
+    super.initState();
+    _pageController = PageController();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _pageController?.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,6 +51,7 @@ class _PPTPageState extends State<PPTPage> {
                 child: Stack(
                   children: <Widget>[
                     PageView.builder(
+                      controller: _pageController,
                       onPageChanged: (selPage) {
                         setState(() {
                           _curIndex = selPage;
@@ -79,6 +93,7 @@ class _PPTPageState extends State<PPTPage> {
                         child: PageIndicator(
                           total: _total,
                           sel: _curIndex,
+                          pageController: _pageController,
                         ),
                       ),
                     )
@@ -154,10 +169,11 @@ class _PPTPageState extends State<PPTPage> {
                   flex: 1,
                   child: Center(
                     child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
                         _item('1.', '  工作回顾'),
-                        _item('2.', '  工作总结')
+                        _item('2.', '  自我成长')
                       ],
                     ),
                   ),
@@ -167,9 +183,10 @@ class _PPTPageState extends State<PPTPage> {
                   child: Center(
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        _item('3.', '  自我成长'),
-                        _item('4.', '  自我反省')
+                        _item('3.', '  自我反省'),
+                        _item('4.', '  结束')
                       ],
                     ),
                   ),

@@ -9,8 +9,9 @@ import 'package:my_web_ppt/com/wangyuelin/ppt/utils/adapt_ui.dart';
 class PageIndicator extends StatelessWidget {
   final int total;
   final int sel;
+  final PageController pageController;
 
-  const PageIndicator({Key key, this.total, this.sel}) : super(key: key);
+  const PageIndicator({Key key, this.total, this.sel, this.pageController}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -28,17 +29,23 @@ class PageIndicator extends StatelessWidget {
   List<Widget> _dots(int total, int sel) {
     List<Widget> dots = [];
     for (int i = 0; i < (total ?? 0); i++) {
-      dots.add(Opacity(
-        opacity: 0.3,
-        child: Container(
-          width: UIAdaptor.w(10),
-          height: UIAdaptor.w(10),
-          margin: EdgeInsets.only(left: UIAdaptor.w(10), right: UIAdaptor.w(10)),
-          decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: i == sel ? Colors.lightBlue : Colours.text_gray_9),
+      dots.add(GestureDetector(
+        child: Opacity(
+          opacity: 0.3,
+          child: Container(
+            width: UIAdaptor.w(10),
+            height: UIAdaptor.w(10),
+            margin: EdgeInsets.only(left: UIAdaptor.w(10), right: UIAdaptor.w(10)),
+            decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: i == sel ? Colors.lightBlue : Colours.text_gray_9),
+          ),
         ),
-      ));
+        onTap: (){
+          pageController?.animateToPage(i, duration: Duration(milliseconds: 400), curve: Curves.linear);
+        },
+      ),
+      );
     }
     return dots;
   }
